@@ -29,7 +29,7 @@ provider "google" {
 resource "google_project_service" "project" {
   service            = "run.googleapis.com"
   project            = var.project_id
-  disable_on_destroy = true
+  disable_on_destroy = false
 }
 
 # -----------------------------------------------------------------------------
