@@ -43,10 +43,20 @@ resource "google_cloud_run_service" "cloud_run" {
     spec {
       containers {
         image = var.image_id
+        env {
+          name = "SOURCE"
+          value = "remote"
+        }
+        env {
+          name = "TARGET"
+          value = "home"
+        }
       }
       service_account_name = google_service_account.cloud_run.email
     }
   }
+
+  autogenerate_revision_name = true
 
   traffic {
     percent         = 100
