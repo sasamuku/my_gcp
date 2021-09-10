@@ -54,6 +54,15 @@ resource "google_cloud_run_service" "cloud_run" {
   }
 }
 
+# Cloud Runアクセス時のIAM認証を無効化
+resource "google_cloud_run_service_iam_member" "cloud_run" {
+  location = google_cloud_run_service.cloud_run.location
+  project  = google_cloud_run_service.cloud_run.project
+  service  = google_cloud_run_service.cloud_run.name
+  role     = "roles/run.invoker"
+  member   = "allUsers"
+}
+
 # Cloud Runに紐付けるサービスアカウント
 resource "google_service_account" "cloud_run" {
   account_id   = "cloud-run"
